@@ -1,0 +1,170 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+        <meta name="description" content="Leaps, a shared text editing web service written in Golang">
+        <meta name="robots" content="index,follow">
+        <meta name="keywords" content="jeffail, Jeffail, JEFFAIL, Ashley Jeffs, ashley, jeffs, ashley jeffs, jeffail, ash jeffs, ashleyjeffs, leaps, golang, go, cloud hosting, text editing, collaborative, collaborative text editor">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Leaps</title>
+        <link rel="shortcut icon" href="favicon.ico?v=4">
+        <link rel="stylesheet" type="text/css" href="/css/creepy.css?v=v1.1.0-7-g2c1376c">
+        <script type="text/javascript" src="/js/creepy.js?v=v1.1.0-7-g2c1376c"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="show-l show-m cols-4 mid-align-container">
+				<a target="_blank" class="clean-url" href="https://twitter.com/jeffail">
+					<strong><i class="fa fa-newspaper-o"></i> NEWS</strong>
+				</a>
+				<a target="_blank" class="clean-url" href="https://github.com/Jeffail/leaps/wiki">
+					<strong><i class="fa fa-book"></i> WIKI</strong>
+				</a>
+                <img style="vertical-align: middle" class="img-m" src="/images/leapsbanner.png" alt="leaps">
+                <a target="_blank" class="clean-url" href="https://github.com/jeffail/leaps">
+					<strong><i class="fa fa-github-alt"></i> CODE</strong>
+				</a>
+				<a target="_blank" class="clean-url" href="https://github.com/Jeffail/leaps/releases">
+					<strong><i class="fa fa-download"></i> ZIPS</strong>
+				</a>
+			</div>
+			<div class="show-s show-xs cols-2 mid-align-container">
+                <img style="vertical-align: middle" class="img-m" src="/images/leapsbanner.png" alt="leaps">
+			</div>
+			<div class="show-s show-xs cols-1 mid-align-container">
+				<a target="_blank" class="clean-url" href="https://twitter.com/jeffail">
+					<strong><i class="fa fa-newspaper-o"></i> NEWS</strong>
+				</a>
+				<a target="_blank" class="clean-url" href="https://github.com/Jeffail/leaps/wiki">
+					<strong><i class="fa fa-book"></i> WIKI</strong>
+				</a>
+			</div>
+			<div class="show-s show-xs cols-1 mid-align-container">
+                <a target="_blank" class="clean-url" href="https://github.com/jeffail/leaps">
+					<strong><i class="fa fa-github-alt"></i> CODE</strong>
+				</a>
+				<a target="_blank" class="clean-url" href="https://github.com/Jeffail/leaps/releases">
+					<strong><i class="fa fa-download"></i> ZIPS</strong>
+				</a>
+			</div>
+        </div>
+        <br>
+        <div class="container blue box">
+            <div class="cols-4 pad-m">
+				<p><strong>
+Leaps is a service for hosting collaboratively edited documents. Operational transforms ensure that any number of editing clients and the server are kept in sync.
+				</strong></p>
+                <p>
+Leaps is ready to be dropped onto a server and deployed as a service. It is a stand alone binary with zero dependencies, and also includes built in support for hosting static files so there's no need for a separate web server (although this isn't a recommended configuration).
+				</p>
+                <p>
+The client is written in plain old JavaScript and is designed to be easily dropped onto a website, with support for binding to textarea elements, ACE editors and CodeMirror editors.
+                </p>
+            </div>
+        </div>
+        <hr class="thick">
+		<div class="container box white">
+			<div class="cols-4 pad-l blog">
+<h1 id="create-your-own-leaps-service">Create your own leaps service</h1>
+<p>Leaps can be demoed by simply downloading the binary and running it with the example config <code>./leaps -c ./config/leaps_example.yaml</code>, but that keeps our documents in memory which is no good. Here is a guide that sets up leaps to access and edit documents in postgreSQL, and also convers writing a basic user interface.</p>
+<h2 id="step-one-download-and-extract">Step one, download and extract</h2>
+<pre><code class="lang-bash">wget https://github.com/Jeffail/leaps/releases/download/v0.<span class="hljs-number">1.1</span>/leaps-linux_amd64-v0.<span class="hljs-number">1.1</span>.tar.gz -O leaps.tar.gz
+tar -xvf ./leaps.tar.gz
+<span class="hljs-built_in">cd</span> leaps
+</code></pre>
+<p>Here we have downloaded the linux 64-bit binary, change the url to suit your architecture of choice (find them at <a href="https://github.com/Jeffail/leaps/releases">github releases</a>).</p>
+<p>First lets get postgreSQL installed (on debian) and set up a user and document table. Leaps also lets you use other databases and the list is always growing, check out <a href="https://github.com/Jeffail/leaps/wiki/Configuration#curatorstorage">here</a>.</p>
+<pre><code class="lang-bash">sudo apt-get install postgresql
+
+<span class="hljs-comment"># Create leaps user</span>
+sudo useradd <span class="hljs-operator">-s</span> /bin/bash leaps
+sudo su -c <span class="hljs-string">'echo leaps:leaps | chpasswd'</span>
+
+<span class="hljs-comment"># Create leaps psql user and database</span>
+sudo -u postgres psql -c <span class="hljs-string">"CREATE USER leaps PASSWORD 'leaps'"</span>
+sudo -u postgres psql -c <span class="hljs-string">"CREATE DATABASE leaps OWNER leaps;"</span>
+
+<span class="hljs-comment"># Using our new leaps psql user and database we create our table (with ID and content fields only for simplicity)</span>
+sudo -u leaps psql <span class="hljs-operator">-d</span> leaps -c <span class="hljs-string">"CREATE TABLE documents (ID varchar(200) PRIMARY KEY, CONTENT text NOT NULL);"</span>
+
+<span class="hljs-comment"># Insert an example file</span>
+sudo -u leaps psql <span class="hljs-operator">-d</span> leaps -c <span class="hljs-string">"INSERT INTO documents (ID, CONTENT) VALUES ('example_doc', 'Hello world');"</span>
+</code></pre>
+<h2 id="step-two-configuration">Step two, configuration</h2>
+<p>Using leaps is all about configuration, when you run leaps you can specify a config file with <code>-c example.yaml</code>, otherwise the default values are used.</p>
+<p>Whether you have loaded a config file or not you can get a full summary of the loaded config values with <code>--print-yaml</code> or <code>--print-json</code>, this is useful for generating a fresh config or validating that your configuration was correct.</p>
+<p>Let&#39;s make a simple configuration for hosting a file in a postgreSQL table. We haven&#39;t got a web server installed, but leaps is able to serve static files itself, so we shall also configure a static file location.</p>
+<pre><code class="lang-yaml">curator:
+<span class="hljs-code">  storage:</span>
+<span class="hljs-code">    type: postgres</span>
+<span class="hljs-code">    sql:</span>
+<span class="hljs-code">      dsn: postgres://leaps:leaps@localhost:5432/leaps?sslmode=disable</span>
+<span class="hljs-code">      db_table:</span>
+<span class="hljs-code">        table: documents</span>
+<span class="hljs-code">        id_column: ID</span>
+<span class="hljs-code">        content_column: CONTENT</span>
+http<span class="hljs-emphasis">_server:
+  static_</span>path: /
+<span class="hljs-code">  socket_path: /socket</span>
+<span class="hljs-code">  address: :8080</span>
+<span class="hljs-code">  www_dir: ./www</span>
+</code></pre>
+<p>This config file leaves out most options as the defaults are sufficient, you can get the full list of values with <code>--print-yaml</code>.</p>
+<p>To set up postgreSQL we specify that we want to use &#39;postgres&#39; as our storage type, a <a href="https://en.wikipedia.org/wiki/Data_source_name">data source name</a> for our database and the table and column names for ID and content fields.</p>
+<p>To set up the static file hosting we simply specify the url paths for static files and websocket connections, an address to bind to and the folder to search for static files within. Let&#39;s also quickly make the www dir in our current directory.</p>
+<pre><code class="lang-bash">mkdir ./www
+</code></pre>
+<p>Save the above configuration as config.yaml and we can now move on.</p>
+<h2 id="step-three-run-leaps">Step three, run leaps</h2>
+<p>To use our new config file we can run leaps as follows...</p>
+<pre><code class="lang-bash">./leaps -c ./config.yaml
+</code></pre>
+<p>This should output:</p>
+<pre><code class="lang-text">Launching a leaps instance, use CTRL+C to close.
+
+2015-01-03T02:13:14Z [service][http] &lt;INFO&gt; Listening for websockets at address: :8080/socket
+2015-01-03T02:13:14Z [service][http] &lt;INFO&gt; Serving static file requests at address: :8080/
+2015-01-03T02:13:14Z [service][stats] &lt;INFO&gt; Listening for stats requests at address: localhost:4040/stats
+</code></pre>
+<p>Otherwise if you see something like <code>Curator error: failed to prepare create statement: dial tcp 127.0.0.1:5432: connection refused</code> then your DSN is wrong or postgreSQL isn&#39;t running.</p>
+<h2 id="step-four-write-the-client">Step four, write the client</h2>
+<p>The leaps client library can be found in ./js, the only script you need is leaps-all.js or leaps-all-min.js, which has support for all editors. However, since we&#39;re only using a textarea we can use the smaller leaps-textarea.js script. Copy this script into your ./www directory.</p>
+<pre><code class="lang-bash">cp ./js/leaps-textarea.js ./www
+</code></pre>
+<p>Writing a client in leaps is very easy for simple use cases, and scales in complexity as your requirements build up. Assuming that we don&#39;t care about about account authorization and we&#39;re happy with a simple textarea interface we can make do with the following page:</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">html</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">head</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text/javascript"</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"/leaps-textarea.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text/javascript"</span>&gt;</span><span class="javascript">
+            <span class="hljs-built_in">window</span>.onload = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+                <span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> leap_client();
+                client.bind_textarea(<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"test"</span>));
+
+                client.on(<span class="hljs-string">"connect"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+                    client.join_document(<span class="hljs-string">"example_doc"</span>);
+                });
+
+                client.connect(<span class="hljs-string">"ws://"</span> + <span class="hljs-built_in">window</span>.location.host + <span class="hljs-string">"/socket"</span>);
+            };
+        </span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>Leaps Example<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">textarea</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"width:80%; min-width:300px"</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"test"</span> <span class="hljs-attribute">rows</span>=<span class="hljs-value">"30"</span>&gt;</span>Not connected.<span class="hljs-tag">&lt;/<span class="hljs-title">textarea</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">html</span>&gt;</span>
+</code></pre>
+<p>Save this page as <code>./www/index.html</code> and open it in a browser at <code>http://localhost:8080</code>.</p>
+<p>The page is pretty ugly, but it should bind a fresh leaps client to the textarea and connect to the document &quot;example_doc&quot;, which we created when we first installed and set up postgreSQL. If you see <code>Not connected</code> in the textarea then make sure leaps is still running.</p>
+<p>If it worked then you should be able to open the page in multiple browser tabs and see edits sync across all of them.</p>
+<h2 id="step-five-play">Step five, play</h2>
+<p>Your document is now accessible through leaps, and as you make changes they are periodically synced with your postgreSQL document. For control over how often syncing occurs, limiting document sizes and more you should check out the configuration wiki page <a href="https://github.com/Jeffail/leaps/wiki/Configuration">here</a>.</p>
+			</div>
+		</div>
+        <br>
+		<div class="container mid-align-container">
+			<p>
+				Copyright (C) UK Copyright Service and protected under UK and international law.
+			</p>
+		</div>
+	</body>
+</html>
