@@ -6,9 +6,9 @@
         <meta name="keywords" content="jeffail, Jeffail, JEFFAIL, Ashley Jeffs, ashley, jeffs, ashley jeffs, jeffail, ash jeffs, ashleyjeffs, leaps, golang, go, cloud hosting, text editing, collaborative, collaborative text editor">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Leaps</title>
-        <link rel="shortcut icon" href="favicon.ico?v=$FAV_VERSION">
-        <link rel="stylesheet" type="text/css" href="css/creepy.css?v=$VERSION">
-        <script type="text/javascript" src="js/creepy.js?v=$VERSION"></script>
+        <link rel="shortcut icon" href="favicon.ico?v=4">
+        <link rel="stylesheet" type="text/css" href="css/creepy.css?v=v1.1.0-9-g298930d">
+        <script type="text/javascript" src="js/creepy.js?v=v1.1.0-9-g298930d"></script>
 	</head>
 	<body>
 		<div class="container">
@@ -48,24 +48,40 @@
 			</div>
         </div>
         <br>
-        <div class="container blue box">
-            <div class="cols-4 pad-m">
+        <div class="container white box">
+            <div class="cols-4 blog pad-l">
+				<h2 class="mid-align-container">
+					<i class="fa fa-users"></i> <i class="fa fa-exchange"></i> <i class="fa fa-file-text"></i> <i class="fa fa-exchange"></i> <i class="fa fa-users"></i>
+				</h2>
 				<p><strong>
 Leaps is a service for hosting collaboratively edited documents. Operational transforms ensure that any number of editing clients and the server are kept in sync.
 				</strong></p>
+			</div>
+		</div>
+		<br>
+        <div class="container blue box">
+            <div class="cols-4 blog pad-l">
+				<h2 class="mid-align-container">No dependencies</h2>
                 <p>
 Leaps is ready to be dropped onto a server and deployed as a service. It is a stand alone binary with zero dependencies, and also includes built in support for hosting static files so there's no need for a separate web server (although this isn't a recommended configuration).
 				</p>
+			</div>
+		</div>
+		<br>
+        <div class="container red box">
+            <div class="cols-4 blog pad-l">
+				<h2 class="mid-align-container">Easy to use</h2>
                 <p>
-The client is written in plain old JavaScript and is designed to be easily dropped onto a website, with support for binding to textarea elements, ACE editors and CodeMirror editors.
+The client is written in plain old JavaScript and is designed to be easily added into a website, with support for binding to textarea elements, ACE editors and CodeMirror editors.
                 </p>
             </div>
         </div>
         <hr class="thick">
 		<div class="container box white">
 			<div class="cols-4 pad-l blog">
-<h1 id="create-your-own-leaps-service">Create your own leaps service</h1>
-<p>Leaps can be demoed by simply downloading the binary and running it with the example config <code>./leaps -c ./config/leaps_example.yaml</code>, but that keeps our documents in memory which is no good. Here is a guide that sets up leaps to access and edit documents in postgreSQL, and also convers writing a basic user interface.</p>
+<h1 id="create-your-own-document-host">Create your own document host</h1>
+<p>Leaps can be demoed with an example page by simply downloading the binary and running it with the example config <code>./leaps -c ./config/leaps_example.yaml</code>, but that keeps our documents in memory which is no good.</p>
+<p>Here is a guide that sets up leaps to access and edit documents in postgreSQL, and also covers writing a basic user interface.</p>
 			</div>
 		</div>
 		<br>
@@ -77,7 +93,7 @@ tar -xvf ./leaps.tar.gz
 <span class="hljs-built_in">cd</span> leaps
 </code></pre>
 <p>Here we have downloaded the linux 64-bit binary, change the url to suit your architecture of choice (find them at <a href="https://github.com/Jeffail/leaps/releases">github releases</a>).</p>
-<p>First lets get postgreSQL installed (on debian) and set up a user and document table. Leaps also lets you use other databases and the list is always growing, check out <a href="https://github.com/Jeffail/leaps/wiki/Configuration#curatorstorage">here</a>.</p>
+<p>First lets get postgreSQL installed (on debian) and set up a user and document table. Leaps also lets you use other databases and the list will grow over time, check out <a href="https://github.com/Jeffail/leaps/wiki/Configuration#curatorstorage">here</a>.</p>
 <pre><code class="lang-bash">sudo apt-get install postgresql
 
 <span class="hljs-comment"># Create leaps user</span>
@@ -102,7 +118,7 @@ sudo -u leaps psql <span class="hljs-operator">-d</span> leaps -c <span class="h
 <h2 id="step-two-configuration">Step two, configuration</h2>
 <p>Using leaps is all about configuration, when you run leaps you can specify a config file with <code>-c example.yaml</code>, otherwise the default values are used.</p>
 <p>Whether you have loaded a config file or not you can get a full summary of the loaded config values with <code>--print-yaml</code> or <code>--print-json</code>, this is useful for generating a fresh config or validating that your configuration was correct.</p>
-<p>Let&#39;s make a simple configuration for hosting a file in a postgreSQL table. We haven&#39;t got a web server installed, but leaps is able to serve static files itself, so we shall also configure a static file location.</p>
+<p>Let&#39;s make a simple configuration for accessing a postgreSQL table. We haven&#39;t got a web server installed, but leaps is able to serve static files itself, so we shall also configure a static file location.</p>
 <pre><code class="lang-yaml">curator:
 <span class="hljs-code">  storage:</span>
 <span class="hljs-code">    type: postgres</span>
@@ -120,7 +136,7 @@ http<span class="hljs-emphasis">_server:
 </code></pre>
 <p>This config file leaves out most options as the defaults are sufficient, you can get the full list of values with <code>--print-yaml</code>.</p>
 <p>To set up postgreSQL we specify that we want to use &#39;postgres&#39; as our storage type, a <a href="https://en.wikipedia.org/wiki/Data_source_name">data source name</a> for our database and the table and column names for ID and content fields.</p>
-<p>To set up the static file hosting we simply specify the url paths for static files and websocket connections, an address to bind to and the folder to search for static files within. Let&#39;s also quickly make the www dir in our current directory.</p>
+<p>To set up the static file hosting we simply specify the url paths for static files as well as websocket connections, an address to bind to and the folder to search for static files within. Let&#39;s also quickly make the www dir in our current directory.</p>
 <pre><code class="lang-bash">mkdir ./www
 </code></pre>
 <p>Save the above configuration as config.yaml and we can now move on.</p>
@@ -185,10 +201,10 @@ http<span class="hljs-emphasis">_server:
 <p>Your document is now accessible through leaps, and as you make changes they are periodically synced with your postgreSQL document. For control over how often syncing occurs, limiting document sizes and more you should check out the configuration wiki page <a href="https://github.com/Jeffail/leaps/wiki/Configuration">here</a>.</p>
 			</div>
 		</div>
-        <br>
+		<br>
 		<div class="container mid-align-container">
 			<p>
-				Copyright (C) UK Copyright Service and protected under UK and international law.
+				Copyright (C) UK Copyright Service and protected under UK and international law or something, I don't know.
 			</p>
 		</div>
 	</body>
