@@ -7,8 +7,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Leaps</title>
         <link rel="shortcut icon" href="favicon.ico?v=4">
-        <link rel="stylesheet" type="text/css" href="css/creepy.css?v=v1.1.0-11-ge013d79">
-        <script type="text/javascript" src="js/creepy.js?v=v1.1.0-11-ge013d79"></script>
+        <link rel="stylesheet" type="text/css" href="css/creepy.css?v=v1.1.0-14-gbd7d95f">
+        <script type="text/javascript" src="js/creepy.js?v=v1.1.0-14-gbd7d95f"></script>
 	</head>
 	<body>
 		<div class="container">
@@ -49,47 +49,56 @@
         </div>
         <br>
         <div class="container white box">
-            <div class="cols-4 blog pad-l">
-				<h2 class="mid-align-container">
-					<i class="fa fa-users"></i> <i class="fa fa-exchange"></i> <i class="fa fa-file-text"></i> <i class="fa fa-exchange"></i> <i class="fa fa-users"></i>
-				</h2>
-				<p><strong>
+            <div class="cols-4">
+				<div class="blog pad-l">
+					<h2 class="mid-align-container">
+						<i class="fa fa-users"></i> <i class="fa fa-exchange"></i> <i class="fa fa-file-text"></i> <i class="fa fa-exchange"></i> <i class="fa fa-users"></i>
+					</h2>
+					<p><strong>
 Leaps is a service for hosting collaboratively edited documents using operational transforms to ensure zero-collision synchronization across any number of editing clients.
-				</strong></p>
+					</strong></p>
+				</div>
 			</div>
 		</div>
 		<br>
         <div class="container blue box">
-            <div class="cols-4 blog pad-l">
-				<h2 class="mid-align-container">No dependencies</h2>
-                <p>
+            <div class="cols-4">
+				<div class="blog pad-l">
+					<h2 class="mid-align-container">No dependencies</h2>
+					<p>
 Leaps is ready to be dropped onto a server and deployed as a service. It is a stand alone binary with zero dependencies.
-				</p>
-				<p>
+					</p>
+					<p>
 Multiple storage options are supported and the list is growing, currently including MySQL, PostgreSQL, file based and in-memory. The optional ability to host static files over HTTP is also included.
-				</p>
+					</p>
+				</div>
 			</div>
 		</div>
 		<br>
         <div class="container red box">
-            <div class="cols-4 blog pad-l">
-				<h2 class="mid-align-container">Easy to use</h2>
-                <p>
+            <div class="cols-4">
+				<div class="blog pad-l">
+					<h2 class="mid-align-container">Easy to use</h2>
+					<p>
 The client is written in plain old JavaScript and is designed to be easily added into a website, with support for binding to textarea elements, ACE editors and CodeMirror editors with a single line of code.
-                </p>
-            </div>
+					</p>
+				</div>
+			</div>
         </div>
         <hr class="thick">
 		<div class="container box white">
-			<div class="cols-4 pad-l blog">
+			<div class="cols-4">
+				<div class="pad-l blog">
 <h1 id="create-your-own-document-host">Create your own document host</h1>
 <p>Leaps can be demoed with an example page by simply downloading the binary and running it with the example config <code>./leaps -c ./config/leaps_example.yaml</code>, but that keeps our documents in memory which is no good.</p>
 <p>Here is a guide that sets up leaps to access and edit documents in postgreSQL, and also covers writing a basic user interface.</p>
+				</div>
 			</div>
 		</div>
 		<br>
 		<div class="container box white">
-			<div class="cols-4 pad-l blog">
+			<div class="cols-4">
+				<div class="pad-l blog">
 <h2 id="step-one-download-and-extract">Step one, download and extract</h2>
 <pre><code class="lang-bash">wget https://github.com/Jeffail/leaps/releases/download/v0.<span class="hljs-number">1.1</span>/leaps-linux_amd64-v0.<span class="hljs-number">1.1</span>.tar.gz -O leaps.tar.gz
 tar -xvf ./leaps.tar.gz
@@ -113,11 +122,13 @@ sudo -u leaps psql <span class="hljs-operator">-d</span> leaps -c <span class="h
 <span class="hljs-comment"># Insert an example file</span>
 sudo -u leaps psql <span class="hljs-operator">-d</span> leaps -c <span class="hljs-string">"INSERT INTO documents (ID, CONTENT) VALUES ('example_doc', 'Hello world');"</span>
 </code></pre>
+				</div>
 			</div>
 		</div>
 		<br>
 		<div class="container box white">
-			<div class="cols-4 pad-l blog">
+			<div class="cols-4">
+				<div class="pad-l blog">
 <h2 id="step-two-configuration">Step two, configuration</h2>
 <p>Using leaps is all about configuration, when you run leaps you can specify a config file with <code>-c example.yaml</code>, otherwise the default values are used.</p>
 <p>Whether you have loaded a config file or not you can get a full summary of the loaded config values with <code>--print-yaml</code> or <code>--print-json</code>, this is useful for generating a fresh config or validating that your configuration was correct.</p>
@@ -143,11 +154,13 @@ http<span class="hljs-emphasis">_server:
 <pre><code class="lang-bash">mkdir ./www
 </code></pre>
 <p>Save the above configuration as config.yaml and we can now move on.</p>
+				</div>
 			</div>
 		</div>
 		<br>
 		<div class="container box white">
-			<div class="cols-4 pad-l blog">
+			<div class="cols-4">
+				<div class="pad-l blog">
 <h2 id="step-three-run-leaps">Step three, run leaps</h2>
 <p>To use our new config file we can run leaps as follows...</p>
 <pre><code class="lang-bash">./leaps -c ./config.yaml
@@ -160,11 +173,13 @@ http<span class="hljs-emphasis">_server:
 2015-01-03T02:13:14Z [service][stats] &lt;INFO&gt; Listening for stats requests at address: localhost:4040/stats
 </code></pre>
 <p>Otherwise if you see something like <code>Curator error: failed to prepare create statement: dial tcp 127.0.0.1:5432: connection refused</code> then your DSN is wrong or postgreSQL isn&#39;t running.</p>
+				</div>
 			</div>
 		</div>
 		<br>
 		<div class="container box white">
-			<div class="cols-4 pad-l blog">
+			<div class="cols-4">
+				<div class="pad-l blog">
 <h2 id="step-four-write-the-client">Step four, write the client</h2>
 <p>The leaps client library can be found in ./js, the only script you need is leaps-all.js or leaps-all-min.js, which has support for all editors. However, since we&#39;re only using a textarea we can use the smaller leaps-textarea.js script. Copy this script into your ./www directory.</p>
 <pre><code class="lang-bash">cp ./js/leaps-textarea.js ./www
@@ -195,13 +210,16 @@ http<span class="hljs-emphasis">_server:
 <p>Save this page as <code>./www/index.html</code> and open it in a browser at <code>http://localhost:8080</code>.</p>
 <p>The page is pretty ugly, but it should bind a fresh leaps client to the textarea and connect to the document &quot;example_doc&quot;, which we created when we first installed and set up postgreSQL. If you see <code>Not connected</code> in the textarea then make sure leaps is still running.</p>
 <p>If it worked then you should be able to open the page in multiple browser tabs and see edits sync across all of them.</p>
+				</div>
 			</div>
 		</div>
 		<br>
 		<div class="container box white">
-			<div class="cols-4 pad-l blog">
+			<div class="cols-4">
+				<div class="pad-l blog">
 <h2 id="step-five-play">Step five, play</h2>
 <p>Your document is now accessible through leaps, and as you make changes they are periodically synced with your postgreSQL document. For control over how often syncing occurs, limiting document sizes and more you should check out the configuration wiki page <a href="https://github.com/Jeffail/leaps/wiki/Configuration">here</a>.</p>
+				</div>
 			</div>
 		</div>
 		<br>
