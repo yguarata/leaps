@@ -7,8 +7,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Leaps</title>
         <link rel="shortcut icon" href="favicon.ico?v=4">
-        <link rel="stylesheet" type="text/css" href="css/creepy.css?v=v1.1.0-14-gbd7d95f">
-        <script type="text/javascript" src="js/creepy.js?v=v1.1.0-14-gbd7d95f"></script>
+        <link rel="stylesheet" type="text/css" href="css/creepy-font.css?v=v1.1.0-16-g0d22f3d">
+        <link rel="stylesheet" type="text/css" href="css/creepy.css?v=v1.1.0-16-g0d22f3d">
+        <script type="text/javascript" src="js/creepy.js?v=v1.1.0-16-g0d22f3d"></script>
 	</head>
 	<body>
 		<div class="container">
@@ -95,18 +96,17 @@ The client is written in plain old JavaScript and is designed to be easily added
 				</div>
 			</div>
 		</div>
-		<br>
-		<div class="container box white">
+		<div class="container box ash">
 			<div class="cols-4">
 				<div class="pad-l blog">
 <h2 id="step-one-download-and-extract">Step one, download and extract</h2>
-<pre><code class="lang-bash">wget https://github.com/Jeffail/leaps/releases/download/v0.<span class="hljs-number">1.1</span>/leaps-linux_amd64-v0.<span class="hljs-number">1.1</span>.tar.gz -O leaps.tar.gz
+<pre class="white"><code class="lang-bash">wget https://github.com/Jeffail/leaps/releases/download/v0.<span class="hljs-number">1.1</span>/leaps-linux_amd64-v0.<span class="hljs-number">1.1</span>.tar.gz -O leaps.tar.gz
 tar -xvf ./leaps.tar.gz
 <span class="hljs-built_in">cd</span> leaps
 </code></pre>
 <p>Here we have downloaded the linux 64-bit binary, change the url to suit your architecture of choice (find them at <a href="https://github.com/Jeffail/leaps/releases">github releases</a>).</p>
 <p>First lets get postgreSQL installed (on debian) and set up a user and document table. Leaps also lets you use other databases and the list will grow over time, check out <a href="https://github.com/Jeffail/leaps/wiki/Configuration#curatorstorage">here</a>.</p>
-<pre><code class="lang-bash">sudo apt-get install postgresql
+<pre class="white"><code class="lang-bash">sudo apt-get install postgresql
 
 <span class="hljs-comment"># Create leaps user</span>
 sudo useradd <span class="hljs-operator">-s</span> /bin/bash leaps
@@ -125,7 +125,6 @@ sudo -u leaps psql <span class="hljs-operator">-d</span> leaps -c <span class="h
 				</div>
 			</div>
 		</div>
-		<br>
 		<div class="container box white">
 			<div class="cols-4">
 				<div class="pad-l blog">
@@ -157,16 +156,15 @@ http<span class="hljs-emphasis">_server:
 				</div>
 			</div>
 		</div>
-		<br>
-		<div class="container box white">
+		<div class="container box ash">
 			<div class="cols-4">
 				<div class="pad-l blog">
 <h2 id="step-three-run-leaps">Step three, run leaps</h2>
 <p>To use our new config file we can run leaps as follows...</p>
-<pre><code class="lang-bash">./leaps -c ./config.yaml
+<pre class="white"><code class="lang-bash">./leaps -c ./config.yaml
 </code></pre>
 <p>This should output:</p>
-<pre><code class="lang-text">Launching a leaps instance, use CTRL+C to close.
+<pre class="white"><code class="lang-text">Launching a leaps instance, use CTRL+C to close.
 
 2015-01-03T02:13:14Z [service][http] &lt;INFO&gt; Listening for websockets at address: :8080/socket
 2015-01-03T02:13:14Z [service][http] &lt;INFO&gt; Serving static file requests at address: :8080/
@@ -176,7 +174,6 @@ http<span class="hljs-emphasis">_server:
 				</div>
 			</div>
 		</div>
-		<br>
 		<div class="container box white">
 			<div class="cols-4">
 				<div class="pad-l blog">
@@ -213,8 +210,7 @@ http<span class="hljs-emphasis">_server:
 				</div>
 			</div>
 		</div>
-		<br>
-		<div class="container box white">
+		<div class="container box ash">
 			<div class="cols-4">
 				<div class="pad-l blog">
 <h2 id="step-five-play">Step five, play</h2>

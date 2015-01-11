@@ -1,0 +1,22 @@
+@font-face {
+	font-family: creepy_font;
+	src: local(creepy_font), url('../fonts/OpenSans-Regular.woff2') format('woff2'),
+	     local(creepy_font), url('../fonts/OpenSans-Regular.woff') format('woff'),
+	     local(creepy_font), url('../fonts/OpenSans-Regular.ttf') format('opentype');
+}
+
+@font-face {
+	font-family: creepy_header_font;
+	src: local(creepy_header_font), url('../fonts/Raleway-ExtraBold.woff2') format('woff2'),
+	     local(creepy_header_font), url('../fonts/Raleway-ExtraBold.woff') format('woff'),
+	     local(creepy_header_font), url('../fonts/Raleway-ExtraBold.ttf') format('opentype');
+}
+
+body, html, a {
+	font-family: "creepy_font", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: 300;
+}
+
+h1, h2, h3, h4, h5, button, strong, .button, .round-button {
+	font-family: "creepy_header_font", "Raleway", Georgia, "Times New Roman", Times, serif;
+}
