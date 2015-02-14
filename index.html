@@ -8,9 +8,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Leaps</title>
 		<link rel="shortcut icon" href="favicon.ico?v=4">
-		<link rel="stylesheet" type="text/css" href="css/creepy-font.css?v=v1.1.0-34-g0278166">
-		<link rel="stylesheet" type="text/css" href="css/creepy.css?v=v1.1.0-34-g0278166">
-		<script type="text/javascript" src="js/creepy.js?v=v1.1.0-34-g0278166"></script>
+		<link rel="stylesheet" type="text/css" href="css/creepy-font.css?v=v1.1.0-36-g39206fa">
+		<link rel="stylesheet" type="text/css" href="css/creepy.css?v=v1.1.0-36-g39206fa">
+		<script type="text/javascript" src="js/creepy.js?v=v1.1.0-36-g39206fa"></script>
 	</head>
 	<body>
 		<div class="ash">
@@ -63,16 +63,13 @@ Leaps is a websockets service for hosting collaboratively edited documents, usin
 			<div style="height: 200px; display: block; background: url(&quot;images/leaps_share2_nodpi_ss.png&quot;) no-repeat scroll 50% / auto 300px transparent;" class="inset-shadow"></div>
 		</div>
 		</div>
-		<div class="ash pad-l-h">
+		<div class="ash pad-l-up">
 			<div class="container">
 				<div class="cols-2">
 					<div class="pad-m">
 						<h2 class="mid-align-container">No dependencies</h2>
 						<p>
-Leaps is written in Go, meaning it is compiled into a stand alone binary with zero dependencies, ready to be dropped and run on a server.
-						</p>
-						<p>
-Multiple document storage options are supported out of the box and the list is growing, currently including MySQL, PostgreSQL, file based and in-memory. The optional ability to host static files over HTTP is also included.
+Leaps is written in Go, meaning it is compiled into a stand alone binary with zero dependencies, ready to be dropped and run on a server. There are builds for all major operating systems.
 						</p>
 					</div>
 				</div>
@@ -80,10 +77,27 @@ Multiple document storage options are supported out of the box and the list is g
 					<div class="pad-m">
 						<h2 class="mid-align-container">Easy to use</h2>
 						<p>
-Leaps is configured through a single config file, with many simple examples for various use cases.
+Leaps is configured through a single config file, currently supporting YAML or JSON, with many examples for various use cases.
 						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="ash pad-l-down">
+			<div class="container">
+				<div class="cols-2">
+					<div class="pad-m">
+						<h2 class="mid-align-container">Share anything</h2>
 						<p>
-The client is written in plain old JavaScript and is designed to be easily added into a website, with support for binding to textarea elements, ACE editors and CodeMirror editors with a single line of code.
+Leaps will happily share and flush changes to your local filesystem, but multiple document storage options are supported out of the box and the list is growing. The list currently includes <strong>MySQL</strong>, <strong>PostgreSQL</strong> and <strong>in-memory</strong>.
+						</p>
+					</div>
+				</div>
+				<div class="cols-2">
+					<div class="pad-m">
+						<h2 class="mid-align-container">Simple web client</h2>
+						<p>
+The client is written in plain old JavaScript and is designed to be easily added into a website, with support for binding to textarea elements, ACE editors and CodeMirror editors with a single line of code. Leaps itself can also serve this client, meaning there's no need for a separate web server to get started.
 						</p>
 					</div>
 				</div>
@@ -105,7 +119,7 @@ The client is written in plain old JavaScript and is designed to be easily added
 				<div class="cols-4">
 					<div class="pad-l blog">
 <h2 id="step-one-download-and-extract">Step one, download and extract</h2>
-<pre class="white"><code class="lang-bash">wget https://github.com/Jeffail/leaps/releases/download/v0.<span class="hljs-number">1.3</span>/leaps-linux_amd64.tar.gz
+<pre class="white"><code class="lang-bash">wget https://github.com/Jeffail/leaps/releases/download/v0.<span class="hljs-number">1.4</span>/leaps-linux_amd64.tar.gz
 tar -xvf ./leaps-linux_amd64.tar.gz
 <span class="hljs-built_in">cd</span> leaps
 </code></pre>
@@ -124,7 +138,7 @@ tar -xvf ./leaps-linux_amd64.tar.gz
 					<div class="pad-l blog">
 <h2 id="step-two-configure-leaps">Step two, configure leaps</h2>
 <p>After installing we ended up with a default config file in <code>/etc/leaps/config.yaml</code>, we need to replace this with a configuration for local file system access. Leaps comes with a premade config file for our purposes in <code>./config/leaps_share.yaml</code>, so let's copy it:</p>
-<pre><code class="lang-bash">cp ./config/leaps_share.yaml /etc/leaps/config.yaml
+<pre><code class="lang-bash">sudo cp ./config/leaps_share.yaml /etc/leaps/config.yaml
 </code></pre>
 <p>For more info on this config file and how to change things such as the HTTP bind address check out the documentation <a href="https://github.com/Jeffail/leaps/wiki/EG-FilesOverLAN">here</a>.</p>
 					</div>
