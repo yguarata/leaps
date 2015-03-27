@@ -8,9 +8,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Leaps</title>
 		<link rel="shortcut icon" href="favicon.ico?v=4">
-		<link rel="stylesheet" type="text/css" href="css/creepy-font.css?v=v1.1.0-37-g25b616e">
-		<link rel="stylesheet" type="text/css" href="css/creepy.css?v=v1.1.0-37-g25b616e">
-		<script type="text/javascript" src="js/creepy.js?v=v1.1.0-37-g25b616e"></script>
+		<link rel="stylesheet" type="text/css" href="css/creepy-font.css?v=v1.1.0-38-g08445a0">
+		<link rel="stylesheet" type="text/css" href="css/creepy.css?v=v1.1.0-38-g08445a0">
+		<script type="text/javascript" src="js/creepy.js?v=v1.1.0-38-g08445a0"></script>
 	</head>
 	<body>
 		<div class="ash">
@@ -107,7 +107,7 @@ The client is written in plain old JavaScript and is designed to be easily added
 			<div class="container">
 				<div class="cols-4">
 					<div class="pad-l blog">
-						<h2 class="script tutorial-title">Quick Tutorial</h2>
+						<h2 id="quick-tutorial" class="script tutorial-title">Quick Tutorial</h2>
 <h3 id="share-files-over-lan">Pair Programming Over LAN</h3>
 <p>Leaps has built in capabilities to share your local file system. Since it can also host its own HTTP web client it can be used to easily and quickly set up pair programming environments over LAN with a single command. Here is an example of sharing a source directory tree.</p>
 					</div>
@@ -119,14 +119,14 @@ The client is written in plain old JavaScript and is designed to be easily added
 				<div class="cols-4">
 					<div class="pad-l blog">
 <h2 id="step-one-download-and-extract">Step one, download and extract</h2>
-<pre class="white"><code class="lang-bash">wget https://github.com/Jeffail/leaps/releases/download/v0.<span class="hljs-number">2.1</span>/leaps-linux_amd64.tar.gz
+<pre class="white"><code class="lang-bash">wget https://github.com/Jeffail/leaps/releases/download/v0.<span class="hljs-number">3</span>.0/leaps-linux_amd64.tar.gz
 tar -xvf ./leaps-linux_amd64.tar.gz
 <span class="hljs-built_in">cd</span> leaps
 </code></pre>
 <p>Here we have downloaded the linux 64-bit binary, change the url to suit your architecture of choice (find them at <a href="https://github.com/Jeffail/leaps/releases">github releases</a>).</p>
 <p>We are going to install leaps, this copies the binary into <code>/usr/sbin/leaps</code> and some config and static web files into <code>/etc/leaps</code>.</p>
-<p><strong>NOTE</strong>: Leaps can be installed with the <code>--daemon</code> option which launches it at boot up, we do <strong>not</strong> want this, so if you have previously installed leaps then uninstall it before proceeding.</p>
-<pre class="white"><code class="lang-bash">sudo ./install.sh
+<p><strong>NOTE</strong>: Leaps can be installed with the <code>--init-daemon</code> option which launches it at boot up, we do <strong>not</strong> want this, so if you have previously installed leaps then uninstall it before proceeding.</p>
+<pre class="white"><code class="lang-bash">sudo ./install-linux.sh
 </code></pre>
 					</div>
 				</div>
