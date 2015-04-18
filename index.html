@@ -8,9 +8,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Leaps</title>
 		<link rel="shortcut icon" href="favicon.ico?v=4">
-		<link rel="stylesheet" type="text/css" href="css/creepy-font.css?v=v1.1.0-38-g08445a0">
-		<link rel="stylesheet" type="text/css" href="css/creepy.css?v=v1.1.0-38-g08445a0">
-		<script type="text/javascript" src="js/creepy.js?v=v1.1.0-38-g08445a0"></script>
+		<link rel="stylesheet" type="text/css" href="css/creepy-font.css?v=v1.1.0-41-gcc30b88">
+		<link rel="stylesheet" type="text/css" href="css/creepy.css?v=v1.1.0-41-gcc30b88">
+		<script type="text/javascript" src="js/creepy.js?v=v1.1.0-41-gcc30b88"></script>
 	</head>
 	<body>
 		<div class="ash">
@@ -110,6 +110,7 @@ The client is written in plain old JavaScript and is designed to be easily added
 						<h2 id="quick-tutorial" class="script tutorial-title">Quick Tutorial</h2>
 <h3 id="share-files-over-lan">Pair Programming Over LAN</h3>
 <p>Leaps has built in capabilities to share your local file system. Since it can also host its own HTTP web client it can be used to easily and quickly set up pair programming environments over LAN with a single command. Here is an example of sharing a source directory tree.</p>
+<p>More tutorials can be found at <a href="https://github.com/Jeffail/leaps/wiki/Examples">Here</a>.
 					</div>
 				</div>
 			</div>
@@ -118,53 +119,33 @@ The client is written in plain old JavaScript and is designed to be easily added
 			<div class="container">
 				<div class="cols-4">
 					<div class="pad-l blog">
-<h2 id="step-one-download-and-extract">Step one, download and extract</h2>
-<pre class="white"><code class="lang-bash">wget https://github.com/Jeffail/leaps/releases/download/v0.<span class="hljs-number">3</span>.0/leaps-linux_amd64.tar.gz
+<h2 id="step-one-download-and-extract-somewhere-memorable">Step one, download and extract somewhere memorable</h2>
+<p>In this example we&#39;re placing leaps into <code>/opt/leaps</code>.</p>
+<pre><code class="lang-bash">wget https://github.com/Jeffail/leaps/releases/download/v0.<span class="hljs-number">4.0</span>/leaps-linux_amd64.tar.gz
 tar -xvf ./leaps-linux_amd64.tar.gz
-<span class="hljs-built_in">cd</span> leaps
+sudo mv ./leaps /opt/
+<span class="hljs-built_in">cd</span> /opt/leaps
 </code></pre>
 <p>Here we have downloaded the linux 64-bit binary, change the url to suit your architecture of choice (find them at <a href="https://github.com/Jeffail/leaps/releases">github releases</a>).</p>
-<p>We are going to install leaps, this copies the binary into <code>/usr/sbin/leaps</code> and some config and static web files into <code>/etc/leaps</code>.</p>
-<p><strong>NOTE</strong>: Leaps can be installed with the <code>--init-daemon</code> option which launches it at boot up, we do <strong>not</strong> want this, so if you have previously installed leaps then uninstall it before proceeding.</p>
-<pre class="white"><code class="lang-bash">sudo ./scripts/install-linux.sh
-</code></pre>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="white">
-			<div class="container">
-				<div class="cols-4">
-					<div class="pad-l blog">
+<p>And optionally add the directory <code>/opt/leaps/bin</code> to your PATH environment variable (otherwise you will need to run leaps with <code>/opt/leaps/bin/leaps</code>).</p>
+<p><code>PATH=/opt/leaps/bin:$PATH</code></p>
 <h2 id="step-two-configure-leaps">Step two, configure leaps</h2>
-<p>After installing we ended up with a default config file in <code>/etc/leaps/config.yaml</code>, we need to replace this with a configuration for local file system access. Leaps comes with a premade config file for our purposes in <code>./config/leaps_share.yaml</code>, so let's copy it:</p>
-<pre><code class="lang-bash">sudo cp ./config/leaps_share.yaml /etc/leaps/config.yaml
+<p>If we run leaps from <code>/opt/leaps/bin/leaps</code> (or wherever you placed it) then it will automatically select a <code>config.yaml</code> file in the parent directory (<code>/opt/leaps/config.yaml</code>). Let&#39;s copy this file from one of the examples:</p>
+<pre><code class="lang-bash">cp ./config/leaps_share.yaml ./config.yaml
 </code></pre>
-<p>For more info on this config file and how to change things such as the HTTP bind address check out the documentation <a href="https://github.com/Jeffail/leaps/wiki/EG-FilesOverLAN">here</a>.</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="ash">
-			<div class="container ash">
-				<div class="cols-4">
-					<div class="pad-l blog">
+<p>For more information about the values in this config file read the <a href="https://github.com/Jeffail/leaps/wiki/Configuration">Configuration page</a>. The jist of this config is that whenever we run the command <code>leaps</code> we begin sharing the files in our current working directory at <code>http://localhost:8001</code>.</p>
 <h2 id="step-three-choose-a-directory-to-share">Step three, choose a directory to share</h2>
 <p>That&#39;s it, you should now be ready to run leaps for sharing files. Navigate to your source code and run leaps:</p>
-<pre class="white"><code>$ cd ~/src/code/cool_project_to_share
+<pre><code>$ cd ~/src/code/cool<span class="hljs-emphasis">_project_</span>to<span class="hljs-emphasis">_share
 $ leaps
-
-Config file not specified, reading from /etc/leaps/config.yaml
+Config file not specified, reading from /opt/leaps/config.yaml
 Launching a leaps instance, use CTRL+C to close.
 
-2015-01-20T23:02:31Z [leaps] &lt;INFO&gt; Serving file search API at path: /files
+</span>2015-01-20T23:02:31Z [leaps] &lt;INFO&gt; Serving file search API at path: /files
 2015-01-20T23:02:31Z [leaps][http] &lt;INFO&gt; Listening for websockets at address: :8001/socket
 2015-01-20T23:02:31Z [leaps][http] &lt;INFO&gt; Serving static file requests at address: :8001/
 2015-01-20T23:02:31Z [leaps][stats] &lt;INFO&gt; Listening for stats requests at address: localhost:4040/stats
-</code></pre><p>You should see an output something like this, you don&#39;t need to specify the configuration file location since leaps checks for the path <code>/etc/leaps/config.yaml</code>.</p>
-<p>Now open a browser at the address <code>http://localhost:8001</code>, or whatever you changed the bind address to, and you should see the editing window. You can invite others to edit these files by finding out your LAN IP and giving them the URL <code>http://&lt;yourIPhere&gt;:8001</code>.</p>
-					<a style="height: 200px; display: block; background: url(&quot;images/leaps_share_nodpi_ss.png&quot;) no-repeat scroll 50% 10% / 800px auto transparent;" href="images/leaps_share_nodpi_ss.png">
-					</a>
+</code></pre><p>You should see an output something like this. Now open a browser at the address <code>http://localhost:8001</code>, or whatever you changed the bind address to, and you should see the editing window. You can invite others to edit these files by finding out your LAN IP and giving them the URL <code>http://&lt;yourIPhere&gt;:8001</code>.</p>
 					</div>
 				</div>
 			</div>
