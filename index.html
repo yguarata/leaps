@@ -8,12 +8,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Leaps</title>
 		<link rel="shortcut icon" href="favicon.ico?v=4">
-		<link rel="stylesheet" type="text/css" href="css/creepy-font.css?v=v1.1.0-46-g97ceaea">
-		<link rel="stylesheet" type="text/css" href="css/creepy.css?v=v1.1.0-46-g97ceaea">
-		<script type="text/javascript" src="js/creepy.js?v=v1.1.0-46-g97ceaea"></script>
+		<link rel="stylesheet" type="text/css" href="css/creepy-font.css?v=v1.1.0-49-g0cd63a9">
+		<link rel="stylesheet" type="text/css" href="css/creepy.css?v=v1.1.0-49-g0cd63a9">
+		<script type="text/javascript" src="js/creepy.js?v=v1.1.0-49-g0cd63a9"></script>
 	</head>
 	<body>
-		<div class="ash">
+		<div class="ash pad-l-h">
 			<div class="container pad-l-h">
 				<div class="show-l show-m cols-4 mid-align-container">
 					<a target="_blank" class="clean-url" href="https://twitter.com/jeffail">
@@ -53,23 +53,60 @@
 					<div class="blog pad-l-w mid-align-container">
 						<br>
 						<strong>
-Leaps is a websockets service for hosting collaboratively edited documents, using operational transforms to ensure zero-collision synchronization across any number of editing clients.
+Leaps is a web service for hosting collaboratively edited text documents, using operational transforms to ensure zero-collision synchronization across any number of editing clients.
 						</strong>
 					</div>
 				</div>
 			</div>
 		</div>
+		<!--
 		<div class="light-grey zig-zag-border">
 			<div style="height: 200px; display: block; background: url(&quot;images/leaps_share2_nodpi_ss.png&quot;) no-repeat scroll 50% / auto 300px transparent;" class="inset-shadow"></div>
 		</div>
+		-->
+		<div class="blue vignette">
+			<div class="container pad-l-h">
+				<div class="cols-2">
+					<div class="pad-m">
+						<h2 class="mid-align-container">Both a tool and a service</h2>
+						<p><strong>
+Leaps can be used for pair programming right out of the box, but also plays nice when building your own web applications around its engine.
+						</strong></p>
+					</div>
+				</div>
+				<div class="cols-2">
+					<div class="mid-align-container">
+						<a target="_blank" href="images/leaps_share3_nodpi_ss.png">
+							<img class="pop-out-screenshot" src="images/leaps_share3_nodpi_ss.png" />
+						</a>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div class="ash pad-l-up">
+		<div class="grey">
+			<div class="container pad-l-h">
+				<div class="cols-2">
+					<div class="mid-align-container pad-s">
+						<img class="pop-out-promo" src="images/storage_options.png" />
+					</div>
+				</div>
+				<div class="cols-2">
+					<div class="pad-m">
+						<h2 class="mid-align-container">Multiple backend options</h2>
+						<p>
+Leaps will happily share and flush changes to your local filesystem, but multiple alternative storage options are supported with more on the way. The list currently includes <strong>MySQL</strong>, <strong>PostgreSQL</strong>, and <strong>in-memory</strong>.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="white pad-l-h">
 			<div class="container">
 				<div class="cols-2">
 					<div class="pad-m">
-						<h2 class="mid-align-container">Ready to use</h2>
+						<h2 class="mid-align-container">Simple web client</h2>
 						<p>
-Leaps can be used for pair programming out of the box, but also plays nice when building web apps around its engine. Leaps is configured through a single config file and comes with many examples for various use cases.
+The client is written in plain old JavaScript and is designed to be easily added into your website, with support for binding to textarea elements, ACE editors and CodeMirror editors with a single line of code.
 						</p>
 					</div>
 				</div>
@@ -77,33 +114,13 @@ Leaps can be used for pair programming out of the box, but also plays nice when 
 					<div class="pad-m">
 						<h2 class="mid-align-container">No dependencies</h2>
 						<p>
-Leaps is written in Go, meaning it is compiled into a stand alone binary with zero dependencies, ready to be dropped and run on a server. There are builds for all major operating systems.
+Leaps is written in Go, meaning it is compiled into a stand alone binary with zero dependencies, ready to be dropped and run on a server with builds for all major operating systems.
 						</p>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="ash pad-l-down">
-			<div class="container">
-				<div class="cols-2">
-					<div class="pad-m">
-						<h2 class="mid-align-container">Share anything</h2>
-						<p>
-Leaps will happily share and flush changes to your local filesystem, but multiple document storage options are supported out of the box and the list is growing. The list currently includes <strong>MySQL</strong>, <strong>PostgreSQL</strong> and <strong>in-memory</strong>.
-						</p>
-					</div>
-				</div>
-				<div class="cols-2">
-					<div class="pad-m">
-						<h2 class="mid-align-container">Simple web client</h2>
-						<p>
-The client is written in plain old JavaScript and is designed to be easily added into a website, with support for binding to textarea elements, ACE editors and CodeMirror editors with a single line of code. Leaps itself can also serve this client, meaning there's no need for a separate web server to get started.
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="white">
+		<div class="ash">
 			<div class="container">
 				<div class="cols-4">
 					<div class="pad-l blog">
@@ -115,7 +132,7 @@ The client is written in plain old JavaScript and is designed to be easily added
 				</div>
 			</div>
 		</div>
-		<div class="ash">
+		<div class="white">
 			<div class="container">
 				<div class="cols-4">
 					<div class="pad-l blog">
@@ -135,7 +152,7 @@ sudo mv ./leaps /opt/
 </code></pre>
 <p>For more information about the values in this config file read the <a href="https://github.com/Jeffail/leaps/wiki/Configuration">Configuration page</a>. The jist of this config is that whenever we run the command <code>leaps</code> we begin sharing the files in our current working directory at <code>http://localhost:8001</code>.</p>
 <h2 id="step-three-choose-a-directory-to-share">Step three, choose a directory to share</h2>
-<p>That&#39;s it, you should now be ready to run leaps for sharing files. Navigate to your source code and run leaps:</p>
+<p>That&#39;s it, you are now ready to share and edit files. Navigate to your source code and run leaps:</p>
 <pre><code>$ cd ~/src/code/cool<span class="hljs-emphasis">_project_</span>to<span class="hljs-emphasis">_share
 $ leaps
 Config file not specified, reading from /opt/leaps/config.yaml
@@ -150,8 +167,8 @@ Launching a leaps instance, use CTRL+C to close.
 				</div>
 			</div>
 		</div>
-		<div class="white">
-			<div class="container white pad-l-h">
+		<div class="ash">
+			<div class="container pad-l-h">
 				<div class="cols-1-3">
 					<a style="text-decoration:none" href="https://github.com/Jeffail/leaps/wiki">
 						<div class="pad-m mid-align-container">
