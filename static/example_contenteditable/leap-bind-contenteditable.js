@@ -1,0 +1,1 @@
+../../bin/js/leap-bind-contenteditable.js
